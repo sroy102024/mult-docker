@@ -4,20 +4,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t sroy102024/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t sanjoykr/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true sroy102024/react-test npm test -- --coverage
+  - docker run -e CI=true sanjoykr/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t sroy102024/multi-client ./client
-  - docker build -t sroy102024/multi-nginx ./nginx
-  - docker build -t sroy102024/multi-server ./server
-  - docker build -t sroy102024/multi-worker ./worker
+  - docker build -t sanjoykr/multi-client ./client
+  - docker build -t sanjoykr/multi-nginx ./nginx
+  - docker build -t sanjoykr/multi-server ./server
+  - docker build -t sanjoykr/multi-worker ./worker
   # login to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take these images and push them to docker hub
-  - docker push sroy102024/multi-client
-  - docker push sroy102024/multi-nginx
-  - docker push sroy102024/multi-server
-  - docker push sroy102024/multi-worker
+  - docker push sanjoykr/multi-client
+  - docker push sanjoykr/multi-nginx
+  - docker push sanjoykr/multi-server
+  - docker push sanjoykr/multi-worker
